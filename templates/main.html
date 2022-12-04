@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magazyn</title>
+</head>
+
+<body>
+    <p><a href="{{ url_for('main') }}">Strona główna</a></p>
+    <p><a href="{{ url_for('history') }}">Historia</a></p>
+
+    <h4>Aktualny stan konta: {{ account.balance }}</h4>
+    <h4>Stan magazynowy: </h4>
+    
+    <table style="width:100%", border="1">
+        <tr>
+            <th>Nazwa produktu</th>
+            <th>Cena produktu</th>
+            <th>Ilość produktu na stanie</th>
+        </tr>
+        {% for product in products %}    
+        <tr>               
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.count }}</td>                                   
+        </tr>
+        {% endfor %}    
+    </table>
+
+    <h3>Sprzedaż</h3>
+    <form action="/sell" method="post">
+        <label for="product_name">nazwa produktu:</label><br>
+        <input type="text" id="product_name" name="product_name"><br>
+        
+        <label for="product_count">liczba sztuk:</label><br>
+        <input type="number" id="product_count" name="product_count"><br>
+        
+        <input type="submit" value="Submit"><br><br>
+    </form>
+    
+    <h3>Kupno</h3>
+    <form action="/buy" method="post">
+        <label for="product_name">nazwa produktu:</label><br>
+        <input type="text" id="product_name" name="product_name"><br>
+        
+        <label for="product_price">cena jednostkowa:</label><br>
+        <input type="number" id="product_price" name="product_price"><br>
+        
+        <label for="product_count">liczba sztuk:</label><br>
+        <input type="number" id="product_count" name="product_count"><br>
+        
+        <input type="submit" value="Submit"><br><br>
+    </form>
+    
+    <h3>Zmiana salda</h3>
+    <form action="/acc_change" method="post">
+        <label for="value">kwota:</label><br>
+        <input type="number" id="value" name="value"><br>
+        
+        <label for="comment">komentarz do zmiany:</label><br>
+        <input type="text" id="comment" name="comment"><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

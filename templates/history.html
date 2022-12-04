@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia</title>
+</head>
+<body>
+
+    <p><a href="{{ url_for('main') }}">Strona główna</a></p>
+    <p><a href="{{ url_for('history') }}">Historia</a></p>
+    
+    <h4>Filtrowanie historii:</h4>
+    <form action="/history" method="post">
+        <label for="start_id">od:</label><br>
+        <input type="number" id="start_id" name="start_id"><br>
+        
+        <label for="end_id">do:</label><br>
+        <input type="number" id="end_id" name="end_id"><br>
+        
+        <input type="submit" value="Submit"><br><br>
+    </form>
+    
+    <table style="width:100%", border="1">
+        <tr>
+            <th>Data</th>
+            <th>Treść</th>
+        </tr>
+        {% for record in history %}    
+        <tr>               
+            <td>{{ record.date }}</td>
+            <td>{{ record.message }}</td>                                 
+        </tr>
+        {% endfor %}    
+    </table>
+</body>
+</html>
